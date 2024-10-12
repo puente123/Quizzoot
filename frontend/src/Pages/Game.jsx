@@ -3,14 +3,32 @@ import NavBar from '../Layout/NavBar'
 
 export default function Game() {
   const [gameCode, setGameCode] = useState("");
+  const [publicGameOffset, setPublicGameOffset] = useState(0);
+  const [listLength, setListLength] = useState(getPublicGames().length);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const pageLength = 10;
 
   const handleInputChange = (event) => {
     setGameCode(event.target.value);
   };
 
+  function changePublicGameOffset(change) {
+    let newOffset = publicGameOffset + pageLength * change;
+    if(newOffset < 0 || newOffset >= listLength)
+      return;
+    setPublicGameOffset(newOffset);
+    if(pageLength > 0)
+      setPageNumber(pageNumber+change);
+    else if(pageLength < 0)
+      setPageNumber(pageNumber-change);
+  }
+
   // PLACEHOLDER
   function attemptJoinGame() {
-    console.log(gameCode);
+    if(gameCode.length !== 6)
+      return;
+    console.log();
   }
 
   // PLACEHOLDER
@@ -28,12 +46,14 @@ export default function Game() {
       subject: "Science",
       playerCount: "12/20"
     });
-    output.push({
-      host: "rhizomaticdreamer",
-      deckName: "History of Materialism",
-      subject: "Philosophy",
-      playerCount: "08/10"
-    });
+    for(let i = 0; i < 30; i++) {
+      output.push({
+        host: "rhizomaticdreamer",
+        deckName: "History of Materialism",
+        subject: "Philosophy",
+        playerCount: i + "/50"
+      });
+    }
     return output;
   }
 
@@ -42,16 +62,15 @@ export default function Game() {
       <NavBar/>
       <div id="private_game_join">
         <h2>Enter private game code</h2>
-        <form>
-          <input 
-            type="text" 
-            id="textBox" 
-            value={gameCode} 
-            onChange={handleInputChange} 
-            maxLength="6" 
-            placeholder="######"/>
-          <button onClick={attemptJoinGame()}>Join game</button>
-        </form>
+        <input 
+          type="text" 
+          pattern="[a-zA-Z0-9]*" 
+          id="textBox" 
+          value={gameCode} 
+          onChange={handleInputChange} 
+          maxLength="6" 
+          placeholder="######"/>
+        <button onClick={() => attemptJoinGame()}>Join game</button>
       </div>
       <hr></hr>
       <div id="public_games_list">
@@ -67,7 +86,7 @@ export default function Game() {
             </tr>
           </thead>
           <tbody>
-            {getPublicGames().map((item, index) => (
+            {getPublicGames().slice(publicGameOffset, publicGameOffset+pageLength).map((item, index) => (
               <tr key={index}>
                 <td title={item.host}>{item.host}</td>
                 <td title={item.deckName}>{item.deckName}</td>
@@ -76,6 +95,16 @@ export default function Game() {
                 <td><button>Join</button></td>
               </tr>
             ))}
+          </tbody>
+        </table>
+        <table>
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td><button onClick={() => changePublicGameOffset(-1)}>{"< Back"}</button></td>
+              <td><p>{pageNumber}</p></td>
+              <td><button onClick={() => changePublicGameOffset(1)}>{"Next >"}</button></td>
+            </tr>
           </tbody>
         </table>
       </div>
