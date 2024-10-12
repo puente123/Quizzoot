@@ -12,8 +12,9 @@ function App() {
    <div className='d-flex justify-content-center bg-dark  vh-100 vw-100'>
     <Router>
       <Routes>
+        <Route exact path= '/' element = {<Login/>}/>
         <Route exact path = '/signup' element= {<Signup/>}/>
-        <Route exact path = '/' element= {<Home/>}/>
+        <Route exact path = '/home' element= {<Home/>}/>
         <Route exact path = '/game' element= {<Game/>}/>
       </Routes>
     </Router>

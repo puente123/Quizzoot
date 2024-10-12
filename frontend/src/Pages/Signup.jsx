@@ -33,6 +33,7 @@ function Signup() {
 		console.log(email)
 		console.log(password)
 		// Backend Post and Get requests here
+		navigate('/home')
 	}
 
 	return (
