@@ -1,27 +1,23 @@
-const { db} = require("../database/mysqlConnection")
+const { db } = require("../database/mysqlConnection");
 
-const createCardDeck = (name, userID, callback) => {
-    const query = "INSERT INTO deckOfCards (name, userID) VALUES (?, ?)"
+const createCardDeck = async (name, userID) => {
+  const query = "INSERT INTO deckOfCards (name, userID) VALUES (?, ?)";
+  try {
+    const [result] = await db.promise().query(query, [name, userID]);
+    return result.insertId;
+  } catch (error) {
+    throw error;
+  }
+};
 
-    db.query(query, [name, userID],(result, error) => {
-        if(error){
-            return callback(error, null)
-        }
-        return callback(null, result.insertId)
-    } )
-}
+const deleteCardDeck = async (id) => {
+  const query = "DELETE FROM deckOfCards WHERE id = ?";
+  try {
+    const [result] = await db.promise().query(query, [id]);
+    return result.affectedRows;
+  } catch (error) {
+    throw error;
+  }
+};
 
-const deleteCardDeck = (id) => {
-    const query = "DLETE FROM deckOfCards WHERE id = ?"
-
-    db.query(query, [id],(result, error) => {
-        if(error){
-            return callback(error, null)
-        }
-        return callback(null, result.insertId)
-    } )
-}
-
-module.exports = {createCardDeck, deleteCardDeck}
-
-
+module.exports = { createCardDeck, deleteCardDeck };
