@@ -1,5 +1,8 @@
 import React from 'react'
 import NavBar from './Layout/NavBar'
+import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
+import Home from "./Pages/Home"
+import Game from "./Pages/Game"
 
 
 function App() {
@@ -7,7 +10,12 @@ function App() {
   return (
    <>
     <NavBar/>
-    <h1>QUIZOOT</h1>
+    <Router>
+      <Routes>
+        <Route exact path = '/' element= {<Home/>}/>
+        <Route exact path = '/game' element= {<game/>}/>
+      </Routes>
+    </Router>
    </>
   )
 }
