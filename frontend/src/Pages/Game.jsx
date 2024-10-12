@@ -57,22 +57,26 @@ export default function Game() {
       <div id="public_games_list">
         <h2>Browse public games</h2>
         <table>
-          <tr>
-            <th>Host</th>
-            <th>Deck</th>
-            <th>Subject</th>
-            <th>Player Count</th>
-            <th></th>
-          </tr>
-        {getPublicGames().map((item, index) => (
-          <tr key={index}>
-            <td title={item.host}>{item.host}</td>
-            <td title={item.deckName}>{item.deckName}</td>
-            <td title={item.subject}>{item.subject}</td>
-            <td title={item.playerCount}>{item.playerCount}</td>
-            <td><button>Join</button></td>
-          </tr>
-        ))}
+          <thead>
+            <tr>
+              <th>Host</th>
+              <th>Deck</th>
+              <th>Subject</th>
+              <th>Player Count</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {getPublicGames().map((item, index) => (
+              <tr key={index}>
+                <td title={item.host}>{item.host}</td>
+                <td title={item.deckName}>{item.deckName}</td>
+                <td title={item.subject}>{item.subject}</td>
+                <td title={item.playerCount}>{item.playerCount}</td>
+                <td><button>Join</button></td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </>
