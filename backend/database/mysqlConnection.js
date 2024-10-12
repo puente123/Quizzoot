@@ -6,35 +6,72 @@ const db = mysql.createConnection({
   password: "password",
 });
 
-
 const connectDB = async () => {
-await db.connect((err) => {
-  if (err) {
-    console.error("Error connecting to MySQL:", err);
-    return;
-  }
-  console.log("Connected to MySQL");
+  try {
+    await new Promise((resolve, reject) => {
+      db.connect((err) => {
+        if (err) {
+          console.error("Error connecting to MySQL:", err);
+          reject(err);
+        } else {
+          console.log("Connected to MySQL");
+          resolve();
+        }
+      });
+    });
 
-  const databaseName = "Quizzoot";
-  db.query(
-    `CREATE DATABASE IF NOT EXISTS \`${databaseName}\``,
-    (err, result) => {
-      if (err) {
-        console.error("Error creating database:", err);
-        return;
-      }
-      console.log(`Database '${databaseName}' ready`);
+    const databaseName = "Quizzoot";
+    await new Promise((resolve, reject) => {
+      db.query(
+        `CREATE DATABASE IF NOT EXISTS \`${databaseName}\``,
+        (err, result) => {
+          if (err) {
+            console.error("Error creating database:", err);
+            reject(err);
+          } else {
+            console.log(`Database '${databaseName}' ready`);
+            resolve();
+          }
+        }
+      );
+    });
 
+    await new Promise((resolve, reject) => {
       db.changeUser({ database: databaseName }, (err) => {
         if (err) {
           console.error("Error changing database:", err);
-          return;
+          reject(err);
+        } else {
+          console.log(`Connected to database '${databaseName}'`);
+          resolve();
         }
-        console.log(`Connected to database '${databaseName}'`);
       });
-    }
-  );
-});
-}
+    });
 
-module.exports = {connectDB, db};
+    // Create flashcards table if it doesn't exist
+    await new Promise((resolve, reject) => {
+      const createFlashcardsTableQuery = `
+        CREATE TABLE IF NOT EXISTS flashcards (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          question TEXT NOT NULL,
+          answer TEXT NOT NULL,
+          FOREIGN KEY (tag) REFERENCES deckOfCards(id) ON DELETE CASCADE
+        )
+      `;
+      db.query(createFlashcardsTableQuery, (err, result) => {
+        if (err) {
+          console.error("Error creating flashcards table:", err);
+          reject(err);
+        } else {
+          console.log("Flashcards table created or already exists");
+          resolve();
+        }
+      });
+    });
+  } catch (err) {
+    console.error("Error during database setup:", err);
+    throw err;
+  }
+};
+
+module.exports = { connectDB, db };
