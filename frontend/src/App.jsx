@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React from 'react'
 import NavBar from './Layout/NavBar'
 
 
@@ -12,4 +12,6 @@ function App() {
   )
 }
 
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 export default App
