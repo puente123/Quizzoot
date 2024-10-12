@@ -1,26 +1,29 @@
+const e = require("express");
 const { db } = require("../database/mysqlConnection");
 
-const createUser = (username, email, profilePhoto, callback) => {
+const createUser = async (username, email, profilePhoto) => {
   const query =
     "INSERT INTO user (userName, email, profilePhoto) VALUES (?, ? ,? )";
 
-  db.query(query, [username, email, profilePhoto || null], (error, results) => {
-    if (error) {
-      return callback(error, null);
-    }
-    return callback(null, results.insertId);
-  });
+  try {
+    const [result] = await db
+      .promise()
+      .query(query, [username, email, profilePhoto || null]);
+    return result.insertId;
+  } catch (error) {
+    throw error;
+  }
 };
 
-const deleteUser = (id, callback) => {
+const deleteUser = async (id) => {
   const query = `DELETE FROM user WHERE id=?`;
 
-  db.query(query, [id], (error, results) => {
-    if (error) {
-      return callback(error, null);
-    }
-    return callback(null, results.affectedRows);
-  });
+  try {
+    const [result] = await db.promise().query(query, [id]);
+    return result.affectedRows;
+  } catch (error) {
+    throw error;
+  }
 };
 
 module.exports = { createUser, deleteUser };
