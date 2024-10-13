@@ -60,7 +60,7 @@ const connectDB = async () => {
       const createUserTableQuery = `
           CREATE TABLE IF NOT EXISTS user (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            userName TEXT NOT NULL,
+            userName TEXT NOT NULL UNIQUE,
              email TEXT NOT NULL,
              profilePhoto BLOB
           )

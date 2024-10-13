@@ -11,6 +11,7 @@ export default function View({username}) {
 
 	const [deck, setDeck] = useState(deckFromNavigate)
 
+	//create new flascard
 
   return (
 	<div className=' d-flex flex-column vh-100 vw-100 align-items-center'>
