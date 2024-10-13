@@ -3,7 +3,7 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 
-const FlashCard = ({front, back}) => {
+const FlashCard = ({question, answer}) => {
 	const [isFront,setIsFront] = useState(true)
 	const [isUndo,setIsUndo] = useState(true)
 	const handleClick = () =>{
@@ -26,20 +26,9 @@ const FlashCard = ({front, back}) => {
 			>
 				<Card.Body className='d-flex align-items-center justify-content-center'>
 					{isFront ? (
-							front // Display front text
-						) : (
-							<ListGroup variant='flush' as="ul"> {/* Use an unordered list for bullet points */}
-								{back.map((answer, index) => (
-									<ListGroupItem
-										as='li'
-										key={index} 
-										className='text-center'
-										bsPrefix='list-group-item'
-									>
-										{answer}
-									</ListGroupItem> // Render each answer as a list item
-								))}
-							</ListGroup>
+							question // Display front text
+						) : (answer
+						
 					)}
 				</Card.Body>
 

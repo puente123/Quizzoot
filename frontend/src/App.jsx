@@ -7,6 +7,7 @@ import Game from "./Pages/Game"
 import Login from './Pages/Login'
 import HostGame from './Pages/HostGame'
 import PrivateTest from './Pages/PrivateTest'
+import View from './Pages/View'
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Route exact path = '/' element= {<Signup setUsername={setUsername}/>}/>
         <Route exact path = '/signup' element= {<Signup setUsername={setUsername}/>}/>
         <Route exact path= '/login' element = {<Login   setUsername={setUsername}/>}/>
-        <Route exact path = '/home' element= {<Home username={username}/>}/>
+        <Route exact path = '/view' element= {<View username={username}/>}/>
+        <Route exact path = '/home' element = {<Home username={username}/>}/>
         <Route exact path = '/game' element= {<Game username = {username}/>}/>
         <Route exact path = '/host' element= {<HostGame username = {username}/>}/>
         <Route exact path = '/test' element= {<PrivateTest username = {username}/>}/>

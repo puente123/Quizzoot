@@ -4,7 +4,6 @@ import { Carousel } from 'react-bootstrap'
 
 
 export default function CardWheel({ deck }) {
-
 	return (
 		<div 
 			style={{
@@ -18,9 +17,9 @@ export default function CardWheel({ deck }) {
 				style={{width: '600px'}}
 				className=''
 			>
-				{deck.map((card,index) =>(
-					<Carousel.Item className='px-5 mx-5'>
-						<FlashCard front={card.front} back = {card.back}/>
+				{deck.map((card) =>(
+					<Carousel.Item key={card.id} className='px-5 mx-5'>
+						<FlashCard question={card.question} answer = {card.answer}/>
 					</Carousel.Item>
 				))}
 			</Carousel>
