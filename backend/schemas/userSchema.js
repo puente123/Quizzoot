@@ -22,4 +22,23 @@ const deleteUserFromDatabase = async (id) => {
   }
 };
 
-module.exports = { addUserToDatabase, deleteUserFromDatabase };
+const verifyUserFromDatabase = async (userName, password) => {
+  const findUserQuery = 'SELECT * FROM user WHERE userName = ?';
+  try {
+    const [rows] = await db.promise().query(findUserQuery, [userName]);
+    if (rows.length === 0) {
+      throw new Error("Username not found");
+    }
+    const user = rows[0];
+    if (user.password === password) {
+      return user;
+    } else {
+      throw new Error("Password was not valid");
+    }
+  } catch (error) {
+    console.error("Error in verifying user", error);
+    throw error;
+  }
+};
+
+module.exports = { addUserToDatabase, deleteUserFromDatabase, verifyUserFromDatabase };

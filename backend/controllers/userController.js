@@ -23,5 +23,17 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const signInUser = async(req, res) => {
+  const {userName, password} = req.body
 
-module.exports = {createUser, deleteUser}
+  try{
+    const response = await verifyUserFromDatabase(userName, password)
+    res.status(201).json({user: response})
+  }
+  catch(error){
+    res.status(401).json({error: error.message})
+  }
+}
+
+
+module.exports = {createUser, deleteUser, signInUser}
