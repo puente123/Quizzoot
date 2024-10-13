@@ -29,14 +29,13 @@ const getDeckOfCardsFromDatabase = async (userID) => {
       d.private AS deckPrivate,
       f.id AS flashcardId,
       f.question AS flashcardQuestion,
-      f.answer AS flashcardAnswer,
-      f.tag AS flashcardTag
+      f.answer AS flashcardAnswer
     FROM 
       deckOfCards d
     LEFT JOIN 
       flashcards f
     ON 
-      d.id = f.deckID
+      d.id = f.tag
     WHERE 
       d.userID = ?
   `;

@@ -33,7 +33,7 @@ const getAllCardDecks = async (req, res) => {
     console.log(response);
     res.status(201).json(response);
   } catch (error) {
-    res.satus(401).json({ error: error.message });
+    res.status(401).json({ error: error.message });
   }
 };
 
