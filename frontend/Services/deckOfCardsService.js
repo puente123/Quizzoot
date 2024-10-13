@@ -18,6 +18,7 @@ const postCardDeck = async (body) => {
     const response = apiClient.post("/", body);
     return response.data;
   } catch (error) {
+    console.error("Error in posCardDeck call", error)
     throw error;
   }
 };
@@ -27,6 +28,7 @@ const getUserCardDecks = async (body) => {
     const response = apiClient.get("/", body);
     return response.data;
   } catch (error) {
+    console.error("Error in getUserCardDeck call", error)
     throw error;
   }
 };
@@ -36,6 +38,7 @@ const getPublicCardDecks = async () => {
     const response = apiClient.get("/public");
     return response.data;
   } catch (error) {
+    console.error("Error in getPublicCardDecks call", error)
     throw error;
   }
 };
@@ -45,6 +48,7 @@ const deleteCardDeck = async (id) => {
     const response = apiClient.delete(`/${id}`);
     return response.data;
   } catch (error) {
+    console.error("Error in deleteCardDeck call", error)
     throw error;
   }
 };

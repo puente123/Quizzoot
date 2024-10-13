@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
     res.status(201).json({id: response});
   } catch (error) {
     res.status(401).json({error: error.message});
-  }
+  }       
 };
 
 const deleteUser = async (req, res) => {
