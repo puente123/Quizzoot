@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-
-
-
-
-
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 function Signup({setUsername}) {
 
@@ -27,11 +24,18 @@ function Signup({setUsername}) {
 
 
 	const handleSubmit = (event) =>{
-		event.preventDefault()
-		const{username,email,password} = formData
-		console.log(username)
-		console.log(email)
-		console.log(password)
+		event.preventDefault();
+		const{username,email,password} = formData;
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				console.log(user);
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorCode, errorMessage);
+			});
 		// Backend Post and Get requests here
 		
 		setUsername(username) // pass the username to the rest of the program
