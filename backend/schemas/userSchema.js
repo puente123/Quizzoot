@@ -1,11 +1,11 @@
 const { db } = require("../database/mysqlConnection");
 
-const addUserToDatabase = async (username, email, profilePhoto) => {
+const addUserToDatabase = async (userName, email, profilePhoto) => {
   const query =
     "INSERT INTO user (userName, email, profilePhoto) VALUES (?, ? ,? )";
 
   try {
-    const [result] = await db.promise().query(query, [username, email, profilePhoto || null]);
+    const [result] = await db.promise().query(query, [userName, email, profilePhoto || null]);
     return result.insertId;
   } catch (error) {
     throw error;
