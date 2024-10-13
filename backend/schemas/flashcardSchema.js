@@ -1,6 +1,6 @@
 const db = require('../database/mysqlConnection')
 
-const createFlashcard = async (question, answer) => {
+const addFlascardToDatabase = async (question, answer) => {
     try{
         const [result] = await db.promise().query(query, [question, answer])
         return result.insertId
@@ -10,7 +10,7 @@ const createFlashcard = async (question, answer) => {
     }
 }
 
-const deleteFlashcard = async (id) =>{
+const deleteFlashcardFromDatabase = async (id) =>{
     try{
         const [result] = await db.promise().query(query,[id])
         return result.affectedRows
@@ -20,4 +20,4 @@ const deleteFlashcard = async (id) =>{
     }
 }
 
-module.exports = {createFlashcard, deleteFlashcard}
+module.exports = {addFlascardToDatabase, deleteFlashcardFromDatabase}

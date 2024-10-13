@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
     const response = await addUserToDatabase(username, email, profilePhoto);
     res.status(201).json(response);
   } catch (error) {
-    res.status(401).json(error);
+    res.status(401).json({error: error.message});
   }
 };
 
@@ -19,7 +19,7 @@ const deleteUser = async (req, res) => {
     const response = await deleteUserFromDatabase(id);
     res.status(201).json(response);
   } catch (error) {
-    res.status(401).json(error);
+    res.status(401).json({error: error.message});
   }
 };
 
