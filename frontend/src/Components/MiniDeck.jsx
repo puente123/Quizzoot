@@ -24,7 +24,7 @@ export default function MiniDeck({deck}) {
 					justify-content-center'
 			>
 					<h3>{deck.name}</h3>
-					<h6>Subject</h6>
+					<h6>{deck.subject}</h6>
 			</Card.Body>
 
 		</Card>
