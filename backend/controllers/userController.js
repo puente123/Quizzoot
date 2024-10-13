@@ -4,9 +4,9 @@ const {
 } = require("../schemas/userSchema");
 
 const createUser = async (req, res) => {
-  const { username, email, profilePhoto } = req.body;
+  const { userName, email, profilePhoto } = req.body;
   try {
-    const response = await addUserToDatabase(username, email, profilePhoto);
+    const response = await addUserToDatabase(userName, email, profilePhoto);
     res.status(201).json({id: response});
   } catch (error) {
     res.status(401).json({error: error.message});
