@@ -1,11 +1,11 @@
-import {React,useState} from 'react'
+import {React,useEffect,useState} from 'react'
 import NavBar from '../Layout/NavBar'
 import CardWheel from '../Components/CardWheel'
 import { Button } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-export default function View({username}) {
+export default function View({username, user}) {
 
 	const location = useLocation()
 	const deckFromNavigate = location.state?.deck || []
@@ -13,10 +13,9 @@ export default function View({username}) {
 	const [deck, setDeck] = useState(deckFromNavigate)
 
 	const navigate = useNavigate()
-	const handleTest = () =>{
-		navigate('/test', {state:{deck:deck.flashcards}})
+	const handleTest = () => {
+		navigate('/test', {state:{deck:deck}})
 	}
-
 
   return (
 	<div className=' d-flex flex-column vh-100 vw-100 align-items-center'>

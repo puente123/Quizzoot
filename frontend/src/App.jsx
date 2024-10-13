@@ -11,6 +11,7 @@ import PrivateTest from './Pages/PrivateTest'
 import View from './Pages/View'
 import ProfileView from './Pages/ProfileView'
 import { onAuthStateChanged } from 'firebase/auth'
+import { Navigate } from 'react-router-dom'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     });
     return () => unsubscribe();
   });
+
   return (
    <div className='d-flex justify-content-center bg-dark  vh-100 vw-100'>
     <Router>
@@ -33,12 +35,11 @@ function App() {
         <Route exact path = '/' element= {<Signup setUsername={setUsername}/>}/>
         <Route exact path = '/signup' element= {<Signup setUsername={setUsername}/>}/>
         <Route exact path= '/login' element = {<Login   setUsername={setUsername}/>}/>
-        <Route exact path = '/view' element= {<View username={username}/>}/>
-        <Route exact path = '/home' element = {<Home username={username}/>}/>
-        <Route exact path = '/game' element= {<Game username = {username}/>}/>
-        <Route exact path = '/host' element= {<HostGame username = {username}/>}/>
-        <Route exact path = '/test' element= {<PrivateTest username = {username}/>}/>
-        <Route exact path= '/profile' element= {<ProfileView username={username}/>}/>
+        <Route exact path = '/view' element= {<View username={username} user={user}/>}/>
+        <Route exact path = '/home' element = {<Home username={username} user={user}/>}/>
+        <Route exact path = '/game' element= {<Game username={username} user={user}/>}/>
+        <Route exact path = '/host' element= {<HostGame username={username} user={user}/>}/>
+        <Route exact path = '/test' element= {<PrivateTest username={username} user={user}/>}/>
       </Routes>
     </Router>
    </div>

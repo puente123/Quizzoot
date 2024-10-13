@@ -17,7 +17,7 @@ export default function Quiz({ deck, returnScore }) {
 	}
 
     function nextQuestion() {
-        if(questionNumber === deck["flashcards"].length) {
+        if(questionNumber === deck.length) {
             returnScore(score);
             return;
         }
@@ -31,16 +31,16 @@ export default function Quiz({ deck, returnScore }) {
     function generateTestFromDeck() {
         let output = [];
         let generatedIndex = 0;
-        for(let i = 0; i < deck["flashcards"].length; i++) {
+        for(let i = 0; i < deck.length; i++) {
             generatedIndex = Math.floor(Math.random() * 4);
             output.push({
-                "question": deck["flashcards"][i].question,
+                "question": deck[i].question,
                 "answers": [],
                 "correctIndex": generatedIndex
             });
             for(let j = 0; j < 4; j++)
                 // TODO: generate fake AI answers and add to array
-                output[i]["answers"].push(j === generatedIndex ? deck["flashcards"][i].answer : "AI wrong answer");
+                output[i]["answers"].push(j === generatedIndex ? deck[i].answer : "AI wrong answer");
         }
         return output;
     }
