@@ -16,6 +16,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path = '/' element= {<Signup setUsername={setUsername}/>}/>
+        <Route exact path = '/signup' element= {<Signup setUsername={setUsername}/>}/>
         <Route exact path= '/login' element = {<Login   setUsername={setUsername}/>}/>
         <Route exact path = '/home' element= {<Home username={username}/>}/>
         <Route exact path = '/game' element= {<Game username = {username}/>}/>
