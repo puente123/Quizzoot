@@ -1,4 +1,4 @@
-const db = require("../database/mysqlConnection");
+const {db} = require("../database/mysqlConnection");
 
 const addFlascardToDatabase = async (question, answer, tag) => {
   const query = "INSERT INTO flashcards (question, answer, tag) VALUES (?, ?, ?)";
