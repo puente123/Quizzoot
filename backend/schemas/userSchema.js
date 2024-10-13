@@ -1,4 +1,3 @@
-const e = require("express");
 const { db } = require("../database/mysqlConnection");
 
 const createUser = async (username, email, profilePhoto) => {
