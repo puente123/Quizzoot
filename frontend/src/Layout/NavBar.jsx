@@ -12,12 +12,13 @@ export default function NavBar({username}) {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">ms{username}</a>
+              {username ? (
+                  <>Signed in as: <a href="#login">{username}</a></>
+                ) : (
+                  <a href="#login">Click to sign in</a>
+              )}
             </Navbar.Text>
           </Navbar.Collapse>
-        </Container>
-        <Container>
-          
         </Container>
       </Navbar>
     </>
