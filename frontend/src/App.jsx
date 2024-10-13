@@ -15,8 +15,8 @@ function App() {
    <div className='d-flex justify-content-center bg-dark  vh-100 vw-100'>
     <Router>
       <Routes>
-        <Route exact path= '/login' element = {<Login   setUsername={setUsername}/>}/>
         <Route exact path = '/' element= {<Signup setUsername={setUsername}/>}/>
+        <Route exact path= '/login' element = {<Login   setUsername={setUsername}/>}/>
         <Route exact path = '/home' element= {<Home username={username}/>}/>
         <Route exact path = '/game' element= {<Game username = {username}/>}/>
         <Route exact path = '/host' element= {<HostGame username = {username}/>}/>

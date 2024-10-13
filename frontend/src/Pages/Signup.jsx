@@ -79,7 +79,10 @@ function Signup({setUsername}) {
 								onChange={handleChange}
 								/>
 						</FloatingLabel>
-						<Button type="submit" className= "mt-3 mx-5 px-5 ">Submit</Button>
+						<div className='d-flex flex-row '>
+							<Button type="submit" className= "mt-3 mx-2 px-4 ">Submit</Button>
+							<Button variant='success' className='mt-3 mx-2 ' href='/login'>I have An account</Button>
+						</div>
 					</Form.Group>
 				</Form>
 			</div>
