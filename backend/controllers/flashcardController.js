@@ -4,9 +4,9 @@ const {
 } = require("../schemas/flashcardSchema");
 
 const createFlashcard = async (req, res) => {
-  const { question, answer, tag } = req.body;
+  const { question, answer, deckId } = req.body;
   try {
-    const response = await addFlascardToDatabase(question, answer, tag);
+    const response = await addFlascardToDatabase(question, answer, deckId);
     res.status(201).json({id: response});
   } catch (error) {
     res.status(401).json({ error: error.message });

@@ -1,10 +1,10 @@
 const { db } = require("../database/mysqlConnection");
 
-const saveCardDeckToDatabase = async (name, private, userID) => {
+const saveCardDeckToDatabase = async (name, private, userId) => {
   const query =
-    "INSERT INTO deckOfCards (name, private, userID) VALUES (?,?, ?)";
+    "INSERT INTO deckOfCards (name, private, userId) VALUES (?,?, ?)";
   try {
-    const [result] = await db.promise().query(query, [name, private, userID]);
+    const [result] = await db.promise().query(query, [name, private, userId]);
     return result.insertId;
   } catch (error) {
     throw error;
@@ -21,11 +21,12 @@ const deleteCardDeckFromDatabase = async (id) => {
   }
 };
 
-const getDeckOfCardsFromDatabase = async (userID) => {
+const getDeckOfCardsFromDatabase = async (userId) => {
   const query = `
     SELECT 
       d.id AS deckId,
       d.name AS deckName,
+      d.subject AS deckSubject,
       d.private AS deckPrivate,
       f.id AS flashcardId,
       f.question AS flashcardQuestion,
@@ -35,13 +36,13 @@ const getDeckOfCardsFromDatabase = async (userID) => {
     LEFT JOIN 
       flashcards f
     ON 
-      d.id = f.tag
+      d.id = f.deckId
     WHERE 
       d.userID = ?
   `;
 
   try {
-    const [rows] = await db.promise().query(query, [userID]);
+    const [rows] = await db.promise().query(query, [userId]);
 
     // Group flashcards by deck
     const decks = {};
@@ -50,6 +51,7 @@ const getDeckOfCardsFromDatabase = async (userID) => {
         decks[row.deckId] = {
           id: row.deckId,
           name: row.deckName,
+          subject: row.deckSubject,
           private: row.deckPrivate,
           flashcards: [],
         };

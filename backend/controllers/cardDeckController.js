@@ -6,9 +6,9 @@ const {
 } = require("../schemas/cardDeckSchema");
 
 const createCardDeck = async (req, res) => {
-  const { name, private, userID } = req.body;
+  const { name, private, userId } = req.body;
   try {
-    const response = await saveCardDeckToDatabase(name, private, userID);
+    const response = await saveCardDeckToDatabase(name, private, userId);
     res.status(201).json({ id: response });
   } catch (error) {
     res.status(401).json({ error: error.message });

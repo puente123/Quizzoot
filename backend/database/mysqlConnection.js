@@ -82,9 +82,10 @@ const connectDB = async () => {
         CREATE TABLE IF NOT EXISTS deckOfCards (
           id INT AUTO_INCREMENT PRIMARY KEY,
           name TEXT NOT NULL,
+          subject TEXT,
           private BOOLEAN DEFAULT FALSE,
-          userID INT, 
-          FOREIGN KEY (userID) REFERENCES user(id) ON DELETE CASCADE
+          userId INT, 
+          FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE
         )
       `;
       db.query(createDeckOfCardsTableQuery, (err, result) => {
@@ -105,8 +106,8 @@ const connectDB = async () => {
             id INT AUTO_INCREMENT PRIMARY KEY,
             question TEXT NOT NULL,
             answer TEXT NOT NULL,
-            tag INT,
-            FOREIGN KEY (tag) REFERENCES deckOfCards(id) ON DELETE CASCADE
+            deckId INT,
+            FOREIGN KEY (deckId) REFERENCES deckOfCards(id) ON DELETE CASCADE
           )
         `;
       db.query(createFlashcardsTableQuery, (err, result) => {
