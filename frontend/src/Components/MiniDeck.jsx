@@ -9,7 +9,7 @@ export default function MiniDeck({deck}) {
 		navigate('/view', {state:{deck:deck.flashcards}})
 	}
   return (
-	<div onClick={handleClick}>
+	<div style={{cursor: "pointer"}} onClick={handleClick}>
 		<Card
 			className=' align-items-center justify-content-center fw-bolder'
 			style={{
@@ -24,7 +24,7 @@ export default function MiniDeck({deck}) {
 					justify-content-center'
 			>
 					<h3>{deck.name}</h3>
-					<h6>{deck.subject}</h6>
+					<h6 className='text-center'>{deck.subject}</h6>
 			</Card.Body>
 
 		</Card>

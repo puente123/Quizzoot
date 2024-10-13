@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Container, Navbar,Nav, Offcanvas, ListGroup, ListGroupItem} from 'react-bootstrap';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate,useLocation } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 export default function NavBar({ username }) {
   const [show,setShow] = useState(false)
@@ -12,7 +14,10 @@ export default function NavBar({ username }) {
   const location = useLocation()
   const handleClick = (event) =>{
     event.preventDefault()
-    // sign out
+    signOut(auth)
+      .then(() => console.log("Sign out"))
+      .catch((error) => console.log(error));
+    navigate("/login");
   }
 	const handleHome = () =>{
 		navigate('/home')
@@ -23,7 +28,7 @@ export default function NavBar({ username }) {
     <Nav>
       <Navbar fixed="top" className="bg-body-tertiary">
         <Container className='align-items-center justify-content-space-between'>
-          <Navbar.Brand onClick={handleHome} className='text-dark'>QUIZZOOT</Navbar.Brand>
+          <Navbar.Brand style={{"cursor": "pointer"}} onClick={handleHome} className='text-dark'>QUIZZOOT</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>

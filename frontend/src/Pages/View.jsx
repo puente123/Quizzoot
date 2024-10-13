@@ -18,7 +18,7 @@ export default function View({username, user}) {
 	}
 
   return (
-	<div className=' d-flex flex-column vh-100 vw-100 align-items-center'>
+	<div className=' d-flex justify-content-center flex-column vh-100 vw-100 align-items-center'>
 		<div className='d-flex flex-row  justify-content-center'>
 			<NavBar username={username} />
 			<div className='pt-5 mt-3 d-flex flex-column align-items-center'>

@@ -6,9 +6,7 @@ import { Container,Row,Col,InputGroup,Form } from 'react-bootstrap'
 
 
 export default function Home({username}) {
-
 	const [searchText,setSearchText] = useState('')
-
 	const [deckList, setDeckList] = useState([
 		[
 			{
@@ -134,13 +132,11 @@ export default function Home({username}) {
 
 	
   return (
-	<div className=' d-flex flex-column vh-100 vw-100 '>
+	<div className=' d-flex justify-content-center flex-column vh-100 vw-100 '>
 		<div className='d-flex flex-row align-items-center justify-content-center '>
-			<NavBar
-				username={username}
-			/>
+			<NavBar username={username} />
 			<div className='d-flex flex-row pt-5 mt-3 mx-5 pb-3 align-items-center justify-content-center'>
-				<h2 className='text-white '> Home Page</h2>
+				<h2 className='text-white fs-1'>Flashcard Decks</h2>
 			</div>
 			
 		</div>

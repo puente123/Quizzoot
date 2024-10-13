@@ -32,7 +32,7 @@ function App() {
    <div className='d-flex justify-content-center bg-dark  vh-100 vw-100'>
     <Router>
       <Routes>
-        <Route exact path = '/' element= {<Signup setUsername={setUsername}/>}/>
+        <Route exact path = '/' element= {<Login setUsername={setUsername}/>}/>
         <Route exact path = '/signup' element= {<Signup setUsername={setUsername}/>}/>
         <Route exact path= '/login' element = {<Login   setUsername={setUsername}/>}/>
         <Route exact path = '/view' element= {<View username={username} user={user}/>}/>

@@ -25,6 +25,8 @@ function Login({setUsername}) {
 	const handleSubmit = (event) =>{
 		event.preventDefault()
 		const{email,password} = formData
+		if(email=="" || password=="")
+			return;
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
 				const user = userCredential.user;
@@ -42,7 +44,7 @@ function Login({setUsername}) {
 	}
 
 	return (
-		<div className='d-flex flex-column align-items-center'>
+		<div className='d-flex justify-content-center flex-column align-items-center'>
 			<h1 className='text-white pb-3'>LOGIN</h1>
 			<div className=''>
 				<Form onSubmit={handleSubmit}>
@@ -69,8 +71,9 @@ function Login({setUsername}) {
 								onChange={handleChange}
 								/>
 						</FloatingLabel>
-						<div className='d-flex flex-row '>
-							<Button type="submit" className= "mt-3 mx-3 px-5 ">Submit</Button>
+						<div className='d-flex flex-row pt-3'>
+							<Button variant='success' type="submit" className= "mt-3 mx-2 px-4 ">Login</Button>
+							<Button variant='secondary' className='mt-3 mx-2 ' href='/signup'>Make account</Button>
 						</div>
 					</Form.Group>
 				</Form>

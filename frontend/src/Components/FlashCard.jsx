@@ -20,7 +20,8 @@ const FlashCard = ({question, answer}) => {
 				className=' align-items-center justify-content-center fw-bolder' 
 				style={{
 					width: '400px',
-					height: '250px'
+					height: '250px',
+					cursor: "pointer"
 				}}
 				onClick={handleClick}
 			>
