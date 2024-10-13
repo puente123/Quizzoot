@@ -1,6 +1,6 @@
 const { db } = require("../database/mysqlConnection");
 
-const createCardDeck = async (name, userID) => {
+const saveCardDeckToDatabase = async (name, userID) => {
   const query = "INSERT INTO deckOfCards (name, userID) VALUES (?, ?)";
   try {
     const [result] = await db.promise().query(query, [name, userID]);
@@ -10,7 +10,7 @@ const createCardDeck = async (name, userID) => {
   }
 };
 
-const deleteCardDeck = async (id) => {
+const deleteCardDeckFromDatabase = async (id) => {
   const query = "DELETE FROM deckOfCards WHERE id = ?";
   try {
     const [result] = await db.promise().query(query, [id]);
@@ -20,4 +20,4 @@ const deleteCardDeck = async (id) => {
   }
 };
 
-module.exports = { createCardDeck, deleteCardDeck };
+module.exports = { saveCardDeckToDatabase, deleteCardDeckFromDatabase };
