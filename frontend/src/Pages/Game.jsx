@@ -3,7 +3,7 @@ import NavBar from '../Layout/NavBar'
 import axios from "axios";
 import { Button } from 'react-bootstrap'
 
-export default function Game() {
+export default function Game({username}) {
   const [gameCode, setGameCode] = useState("");
   const [connected, setConnected] = useState(false);
   const [playing, setPlaying] = useState(false);
@@ -54,9 +54,9 @@ export default function Game() {
   if(!playing) {
     return (
       <>
-        <NavBar/>
+        <NavBar username={username} />
         <div className="d-flex justify-content-center align-items-center vh-100">
-          <h1 className="text-white fs-3">{data}</h1>
+          <h1 className="text-white fs-3">No servers yet. Multiplayer coming soon!</h1>
         </div>
       </>
     )

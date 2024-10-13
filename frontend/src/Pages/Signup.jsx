@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { postUser } from '../Services/userService'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
-
-
-function Signup({setUsername, setUserId}) {
+function Signup({setUsername}) {
 
 	const [formData, setFormData] = useState({
 		userName:'',
@@ -24,25 +23,31 @@ function Signup({setUsername, setUserId}) {
 	}
 
 
-	const handleSubmit = async (event) =>{
-		event.preventDefault()
-		const{userName,email,password} = formData
-		console.log(userName)
-		console.log(email)
-		console.log(password)
+	const handleSubmit = (event) =>{
+		event.preventDefault();
+		const{username,email,password} = formData;
+		if(username=="" || email=="" || password=="")
+			return;
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				console.log(user);
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorCode, errorMessage);
+			});
 		// Backend Post and Get requests here
 		
 		setUsername(userName)
-		const {id} = await postUser(formData)
-		console.log("userid", id)
-		setUserId(id)
 		// pass the username to the rest of the program
 		navigate('/home')
 	}
 
 	return (
-		<div className='d-flex flex-column align-items-center'>
-			<h1 className='text-white pb-5'>SIGNUP</h1>
+		<div className='d-flex justify-content-center flex-column align-items-center'>
+			<h1 className='text-white pb-3'>SIGNUP</h1>
 			<div className=''>
 				<Form onSubmit={handleSubmit}>
 					<Form.Group>
@@ -81,9 +86,9 @@ function Signup({setUsername, setUserId}) {
 								onChange={handleChange}
 								/>
 						</FloatingLabel>
-						<div className='d-flex flex-row '>
-							<Button type="submit" className= "mt-3 mx-2 px-4 ">Submit</Button>
-							<Button variant='success' className='mt-3 mx-2 ' href='/login'>I have An account</Button>
+						<div className='d-flex flex-row pt-3'>
+							<Button variant='success' type="submit" className= "mt-3 mx-2 px-4 ">Create Account</Button>
+							<Button variant='secondary' className='mt-3 mx-2 ' href='/login'>I already have an account</Button>
 						</div>
 					</Form.Group>
 				</Form>

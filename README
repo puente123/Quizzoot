@@ -1,1 +1,29 @@
+# Quizzoot
+### Generate quizzes out of flashcards for self-study or play competitive learning games with friends and strangers.
 
+**Made for HackUTA 2024 by:**
+@KETK3T
+@puente123
+@MarshalMarks
+@sammuelksanchez 
+
+## Inspiration
+In our early years of schooling, we've all used online services like Quizlet and Kahoot to study and accelerate our learning. However, over the years, these services have increasingly locked core functionality behind paywalls, making them inaccessible and inconvenient for a majority of students. That is why we were inspired to build Quizzoot: a service that allows students to conveniently find, share, and study online academic resources without having to ask for their mom's credit card just to access basic functionality.
+
+## What it does
+Quizzoot is a site that allows users to study with flashcards and take practice tests. Flashcards are stored in decks based on specific topics or classes, and these decks can be bundled into sets based on broader subjects. Users can search for public decks/sets or they can make their own private decks for studying and testing.
+
+## How we built it
+We started by planning some of the project requirements in a Google Doc for the first hour. Then, we created a React+Vite project and pushed it to a shared GitHub repository. NPM was used as our package manager. After that, each of us branched off to work on a different aspect of the website. The backend was made with Javascript running on NodeJS with a MySQL database to store flashcards and users. The frontend was made of a connected mesh of JSX files using the React library using Bootstrap for visual styling. User authentication was done with the Firebase Authentication API.
+
+## Challenges we ran into
+Early on, we realized that we had slightly different interpretations of what the exact structure of the service would be. We resolved this by defining terminology and hashing out a database schema based on the list of requirements. This could have been improved with a page layout and navigation planning document to narrow in on a more exact coordinated vision. Fatigue was also an issue, and we did not leave enough time at the end to account for this. After half of the team left to get some much-needed sleep, some work was done to start to bring the different parts of the website together.
+
+## Accomplishments that we're proud of
+Given our relative lack of experience, we were proud of the fact that we built most of the components of the application that we set out to create within the given 24 hour period and used tools that we had little to no prior experience with. We wrote and committed almost 1,600 lines of code over the course of the hackathon.
+
+## What we learned
+We learned and successfully applied several technologies that we had never used before in a live development setting, such as Firebase Authentication, Vite, and MySQL. This experience has taught us all a lot about what is actually required to develop a web application in a fast-paced team environment, including planning, technical knowledge, communication, and technical coordination.
+
+## What's next for Quizzoot
+We are confident in the viability of this concept, but our initial plan was too large in scope to accomplish in 24 hours. In the future, Quizzoot will not only allow users to study and test themselves, but we will also add an online component that allows users to compete against other users in online quiz games. We would also like to finish the AI integration in the quiz feature. Mainly, if this project is to continue, we must focus more on designing a sustainable financial model for the platform that does not force us to lock core functionality behind a paywall.

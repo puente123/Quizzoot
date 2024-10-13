@@ -16,9 +16,9 @@ export default function ProfileView({username}) {
 				"subject": "Intro To Software",
 				"private": 0,
 				"flashcards": [
-					{ "id": 4, "question": "intro1", "answer": "i1" },
-					{ "id": 5, "question": "intro2", "answer": "i2" },
-					{ "id": 6, "question": "intro3", "answer": "i3" }
+					{ "id": 4, "question": "binary", "base 2 (1s and 0s)": "i1" },
+					{ "id": 5, "question": "What does \"IDE\" stand for?", "answer": "Integrated Development Environment" },
+					{ "id": 6, "question": "kernel", "the OS communication layer between the UI and the bare metal": "i3" }
 				]
 			},
 			{
@@ -38,9 +38,9 @@ export default function ProfileView({username}) {
 				"subject": "Linear Algebra",
 				"private": 1,
 				"flashcards": [
-					{ "id": 10, "question": "algebra1", "answer": "al1" },
-					{ "id": 11, "question": "algebra2", "answer": "al2" },
-					{ "id": 12, "question": "algebra3", "answer": "al3" }
+					{ "id": 10, "question": "vector", "answer": "sets of numbers" },
+					{ "id": 11, "question": "magnitude", "answer": "the length of a vector" },
+					{ "id": 12, "question": "matrix", "answer": "grid of number with more than 1 dimension" }
 				]
 			},
 			{
@@ -51,7 +51,7 @@ export default function ProfileView({username}) {
 				"flashcards": [
 					{ "id": 13, "question": "force", "answer": "f=ma" },
 					{ "id": 14, "question": "gravity", "answer": "9.8 m/s^2" },
-					{ "id": 15, "question": "motion", "answer": "kinematics" }
+					{ "id": 15, "question": "energy", "answer": "e=mc^2" }
 				]
 			},
 			{
@@ -62,7 +62,7 @@ export default function ProfileView({username}) {
 				"flashcards": [
 					{ "id": 16, "question": "independence", "answer": "1776" },
 					{ "id": 17, "question": "civil war", "answer": "1861-1865" },
-					{ "id": 18, "question": "new deal", "answer": "FDR" }
+					{ "id": 18, "question": "new deal", "answer": "1933-1936" }
 				]
 			},
 			{
@@ -72,7 +72,7 @@ export default function ProfileView({username}) {
 				"private": 1,
 				"flashcards": [
 					{ "id": 19, "question": "cell", "answer": "basic unit of life" },
-					{ "id": 20, "question": "photosynthesis", "answer": "plants make food" },
+					{ "id": 20, "question": "photosynthesis", "answer": "conversion of sunlight into energy" },
 					{ "id": 21, "question": "DNA", "answer": "genetic material" }
 				]
 			},
@@ -84,7 +84,7 @@ export default function ProfileView({username}) {
 				"flashcards": [
 					{ "id": 22, "question": "atom", "answer": "basic unit of matter" },
 					{ "id": 23, "question": "bonding", "answer": "ionic & covalent" },
-					{ "id": 24, "question": "pH", "answer": "acidity measure" }
+					{ "id": 24, "question": "pH", "answer": "measure of acidity" }
 				]
 			},
 			{
@@ -94,7 +94,7 @@ export default function ProfileView({username}) {
 				"private": 0,
 				"flashcards": [
 					{ "id": 25, "question": "thesis", "answer": "main argument" },
-					{ "id": 26, "question": "citation", "answer": "giving credit" },
+					{ "id": 26, "question": "citation", "answer": "reference to a source" },
 					{ "id": 27, "question": "essay", "answer": "structured writing" }
 				]
 			},
@@ -104,9 +104,9 @@ export default function ProfileView({username}) {
 				"subject": "Intermediate Programming",
 				"private": 1,
 				"flashcards": [
-					{ "id": 28, "question": "array", "answer": "data structure" },
-					{ "id": 29, "question": "loop", "answer": "iteration" },
-					{ "id": 30, "question": "function", "answer": "reusable code" }
+					{ "id": 28, "question": "array", "answer": "list of elements" },
+					{ "id": 29, "question": "loop", "answer": "repeats block of code based on condition" },
+					{ "id": 30, "question": "function", "answer": "block of reusable code with inputs and outputs" }
 				]
 			},
 			{

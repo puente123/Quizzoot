@@ -1,13 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import {signInUser} from "../Services/userService"
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
-
-
-
-
-function Login({setUsername, setUserId}) {
+function Login({setUsername}) {
 
 	const [formData, setFormData] = useState({
 		email:'',
@@ -28,30 +25,26 @@ function Login({setUsername, setUserId}) {
 	const handleSubmit = async (event) =>{
 		event.preventDefault()
 		const{email,password} = formData
-		console.log(email)
-		console.log(password)
-
-		const data = {
-			email: email, 
-			password: password
-		}
-		console.log(data)
-
+		if(email=="" || password=="")
+			return;
+		signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				console.log(user);
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorCode, errorMessage);
+			});
 		// Backend Post and Get requests here
-		console.log(formData)
-		const response = await signInUser(data)
-
-		console.log(response)
-		//setUserId(response.user.id)
-		console.log(response.user)
-		console.log(response.user.userName)
-		setUsername(response.user.userName) // pass the username to the rest of the program
-
+		
+		setUsername(email) // pass the username to the rest of the program
 		navigate('/home')
 	}
 
 	return (
-		<div className='d-flex flex-column align-items-center'>
+		<div className='d-flex justify-content-center flex-column align-items-center'>
 			<h1 className='text-white pb-3'>LOGIN</h1>
 			<div className=''>
 				<Form onSubmit={handleSubmit}>
@@ -78,8 +71,9 @@ function Login({setUsername, setUserId}) {
 								onChange={handleChange}
 								/>
 						</FloatingLabel>
-						<div className='d-flex flex-row '>
-							<Button type="submit" className= "mt-3 mx-3 px-5 ">Submit</Button>
+						<div className='d-flex flex-row pt-3'>
+							<Button variant='success' type="submit" className= "mt-3 mx-2 px-4 ">Login</Button>
+							<Button variant='secondary' className='mt-3 mx-2 ' href='/signup'>Make account</Button>
 						</div>
 					</Form.Group>
 				</Form>

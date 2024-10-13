@@ -18,7 +18,7 @@ const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
     const response = await deleteUserFromDatabase(id);
-    res.status(201).json({affectedRoww: response});
+    res.status(201).json({affectedRow: response});
   } catch (error) {
     res.status(401).json({error: error.message});
   }

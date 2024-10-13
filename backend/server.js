@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
-//Middlewear
+//Middleware
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
