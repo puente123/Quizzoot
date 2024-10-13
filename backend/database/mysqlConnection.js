@@ -5,10 +5,7 @@ const db = mysql.createConnection({
   password: "password",
 });
 
-
 const connectDB = async () => {
- 
-
   try {
     await new Promise((resolve, reject) => {
       db.connect((err) => {
@@ -54,13 +51,13 @@ const connectDB = async () => {
         }
       });
     });
-
+    
     //Creates User Table
     await new Promise((resolve, reject) => {
       const createUserTableQuery = `
           CREATE TABLE IF NOT EXISTS user (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            userName TEXT NOT NULL UNIQUE,
+            userName VARCHAR(255) NOT NULL UNIQUE,
             password TEXT,
              email TEXT NOT NULL,
              profilePhoto BLOB

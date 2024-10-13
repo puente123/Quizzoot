@@ -1,10 +1,10 @@
 const { db } = require("../database/mysqlConnection");
 
-const addUserToDatabase = async (userName, email, profilePhoto) => {
+const addUserToDatabase = async (userName, email, password, profilePhoto) => {
   const query =
-    "INSERT INTO user (userName, email, profilePhoto) VALUES (?, ? ,? )";
+    "INSERT INTO user (userName, email, password, profilePhoto) VALUES (?, ? , ?,? )";
   try {
-    const [result] = await db.promise().query(query, [userName, email, profilePhoto || null]);
+    const [result] = await db.promise().query(query, [userName, email, password, profilePhoto || null]);
     return result.insertId;
   } catch (error) {
     throw error;
@@ -22,10 +22,11 @@ const deleteUserFromDatabase = async (id) => {
   }
 };
 
-const verifyUserFromDatabase = async (userName, password) => {
-  const findUserQuery = 'SELECT * FROM user WHERE userName = ?';
+const verifyUserFromDatabase = async (email, password) => {
+  const findUserQuery = 'SELECT * FROM user WHERE password= ?';
   try {
-    const [rows] = await db.promise().query(findUserQuery, [userName]);
+    const [rows] = await db.promise().query(findUserQuery, [password]);
+    console.log(rows)
     if (rows.length === 0) {
       throw new Error("Username not found");
     }

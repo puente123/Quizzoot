@@ -1,87 +1,25 @@
-import {React,useState} from 'react'
+import {React,useState, useEffect} from 'react'
 import NavBar from '../Layout/NavBar'
 import MiniDeck from '../Components/MiniDeck'
 import { Container,Row,Col,InputGroup,Form } from 'react-bootstrap'
+import { getUserCardDecks } from '../Services/deckOfCardsService'
 
 
-
-export default function Home({username}) {
+export default function Home({username, userId}) {
 
 	const [searchText,setSearchText] = useState('')
 
-	const [deckList, setDeckList] = useState([
-		[
-			{
-				"id": 1,
-				"name": "CSE3310",
-				"subject": "Intro To Software",
-				"private": 0,
-				"flashcards": [
-					{
-						"id": 4,
-						"question": "intro1",
-						"answer": "i1"
-					},
-					{
-						"id": 5,
-						"question": "intro2",
-						"answer": "i2"
-					},
-					{
-						"id": 6,
-						"question": "intro3",
-						"answer": "i3"
-					}
-				]
-			},
-			{
-				"id": 4,
-				"name": "coms2302",
-				"subject": "communicatiosn",
-				"private": 1,
-				"flashcards": [
-					{
-						"id": 7,
-						"question": "coms1",
-						"answer": "c1"
-					},
-					{
-						"id": 8,
-						"question": "coms2",
-						"answer": "c2"
-					},
-					{
-						"id": 9,
-						"question": "coms3",
-						"answer": "c3"
-					}
-				]
-			},
-			{
-				"id": 5,
-				"name": "math3330",
-				"subject": "linear algebra",
-				"private": 1,
-				"flashcards": [
-					{
-						"id": 10,
-						"question": "algebra1",
-						"answer": "al1"
-					},
-					{
-						"id": 11,
-						"question": "algebra2",
-						"answer": "al2"
-					},
-					{
-						"id": 12,
-						"question": "algebra3",
-						"answer": "al3"
-					}
-				]
-			}
-		]
-	])
+	const [deckList, setDeckList] = useState([])
+
+	const fetchDecks = async () => {
+		const response = await getUserCardDecks(userId)
+		console.log(response)
+		setDeckList(response)
+	}
+		
+	useEffect(()=>{
+		fetchDecks()
+	}, [])
 
 
 	const filteredDecks = deckList.flat().filter(deck => 

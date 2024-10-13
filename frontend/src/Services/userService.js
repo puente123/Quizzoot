@@ -33,11 +33,13 @@ const deleteUser = async (id) => {
 }
 
 const signInUser = async(body) => {
+    console.log(body)
     try{
-        const response = await apiClient.get('/signin', body)
+        const response = await apiClient.post('/signin', body)
+        console.log(response)
         return response.data
     }catch(error){
-        console.error("Error in signInUser frontnend", error)
+        console.error("Error in signInUser frontend", error)
     }
 }
 

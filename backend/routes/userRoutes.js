@@ -4,7 +4,8 @@ const userRouter = express.Router();
 
 userRouter.post("/", createUser);
 userRouter.delete("/:id", deleteUser)
-userRouter.get('/signin', signInUser)
+userRouter.post('/signin', signInUser)
 
 
 module.exports = userRouter;
+ 

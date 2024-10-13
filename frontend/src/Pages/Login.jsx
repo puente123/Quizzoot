@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import {signInUser} from "../Services/userService"
 
 
 
 
 
-
-function Login({setUsername}) {
+function Login({setUsername, setUserId}) {
 
 	const [formData, setFormData] = useState({
 		email:'',
@@ -25,14 +25,28 @@ function Login({setUsername}) {
 	}
 
 
-	const handleSubmit = (event) =>{
+	const handleSubmit = async (event) =>{
 		event.preventDefault()
 		const{email,password} = formData
 		console.log(email)
 		console.log(password)
+
+		const data = {
+			email: email, 
+			password: password
+		}
+		console.log(data)
+
 		// Backend Post and Get requests here
-		
-		setUsername(username) // pass the username to the rest of the program
+		console.log(formData)
+		const response = await signInUser(data)
+
+		console.log(response)
+		//setUserId(response.user.id)
+		console.log(response.user)
+		console.log(response.user.userName)
+		setUsername(response.user.userName) // pass the username to the rest of the program
+
 		navigate('/home')
 	}
 

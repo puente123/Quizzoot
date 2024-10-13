@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { postUser } from '../Services/userService'
 
 
-function Signup({setUsername}) {
+
+function Signup({setUsername, setUserId}) {
 
 	const [formData, setFormData] = useState({
-		username:'',
+		userName:'',
 		email:'',
 		password:''
 	})
@@ -22,15 +24,19 @@ function Signup({setUsername}) {
 	}
 
 
-	const handleSubmit = (event) =>{
+	const handleSubmit = async (event) =>{
 		event.preventDefault()
-		const{username,email,password} = formData
-		console.log(username)
+		const{userName,email,password} = formData
+		console.log(userName)
 		console.log(email)
 		console.log(password)
 		// Backend Post and Get requests here
 		
-		setUsername(username) // pass the username to the rest of the program
+		setUsername(userName)
+		const {id} = await postUser(formData)
+		console.log("userid", id)
+		setUserId(id)
+		// pass the username to the rest of the program
 		navigate('/home')
 	}
 
@@ -46,10 +52,10 @@ function Signup({setUsername}) {
 							className='mb-3'
 						>
 							<Form.Control 
-								type="username" 
-								name="username"
+								type="userName" 
+								name="userName"
 								placeholder="Username" 
-								value={formData.username}
+								value={formData.userName}
 								onChange={handleChange}
 								/>
 						</FloatingLabel>
