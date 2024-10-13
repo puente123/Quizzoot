@@ -2,7 +2,8 @@ const { response } = require("express");
 const {
   saveCardDeckToDatabase,
   deleteCardDeckFromDatabase,
-  getDeckOfCardsFromDatabase,
+  getUsersDeckOfCardsFromDatabase,
+  getPublicDecksFromDatabase
 } = require("../schemas/cardDeckSchema");
 
 const createCardDeck = async (req, res) => {
@@ -25,11 +26,11 @@ const deleteCardDeck = async (req, res) => {
   }
 };
 
-const getAllCardDecks = async (req, res) => {
+const getUsersCardDecks = async (req, res) => {
   const { userId } = req.body;
 
   try {
-    const response = await getDeckOfCardsFromDatabase(userId);
+    const response = await getUsersDeckOfCardsFromDatabase(userId);
     console.log(response);
     res.status(201).json(response);
   } catch (error) {
@@ -37,4 +38,14 @@ const getAllCardDecks = async (req, res) => {
   }
 };
 
-module.exports = { createCardDeck, deleteCardDeck, getAllCardDecks };
+const getPublicDecks = async (req, res) => {
+  try{
+    const response = await getPublicDecksFromDatabase()
+    res.status(200).json(response)
+  }
+  catch(error){
+    res.status(401).json({error: error.message})
+  }
+}
+
+module.exports = { createCardDeck, deleteCardDeck, getUsersCardDecks, getPublicDecks };

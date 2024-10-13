@@ -21,7 +21,7 @@ const deleteCardDeckFromDatabase = async (id) => {
   }
 };
 
-const getDeckOfCardsFromDatabase = async (userId) => {
+const getUsersDeckOfCardsFromDatabase = async (userId) => {
   const query = `
     SELECT 
       d.id AS deckId,
@@ -45,10 +45,10 @@ const getDeckOfCardsFromDatabase = async (userId) => {
     const [rows] = await db.promise().query(query, [userId]);
 
     // Group flashcards by deck
-    const decks = {};
+    const userDecks = {};
     rows.forEach((row) => {
-      if (!decks[row.deckId]) {
-        decks[row.deckId] = {
+      if (!userDecks[row.deckId]) {
+        userDecks[row.deckId] = {
           id: row.deckId,
           name: row.deckName,
           subject: row.deckSubject,
@@ -57,18 +57,71 @@ const getDeckOfCardsFromDatabase = async (userId) => {
         };
       }
       if (row.flashcardId) {
-        decks[row.deckId].flashcards.push({
+        userDecks[row.deckId].flashcards.push({
           id: row.flashcardId,
           question: row.flashcardQuestion,
           answer: row.flashcardAnswer,
-          tag: row.flashcardTag,
         });
       }
     });
-    return Object.values(decks);
+    return Object.values(userDecks);
   } catch (error) {
     throw error;
   }
 };
 
-module.exports = { saveCardDeckToDatabase, deleteCardDeckFromDatabase, getDeckOfCardsFromDatabase };
+const getPublicDecksFromDatabase = async () => {
+  const query = `
+    SELECT 
+      d.id AS deckId,
+      d.name AS deckName,
+      d.subject AS deckSubject,
+      d.private AS deckPrivate,
+      f.id AS flashcardId,
+      f.question AS flashcardQuestion,
+      f.answer AS flashcardAnswer
+    FROM 
+      deckOfCards d
+    LEFT JOIN 
+      flashcards f
+    ON 
+      d.id = f.deckId
+    WHERE 
+      d.private = false
+  `;
+
+  try {
+    const [rows] = await db.promise().query(query);
+
+    // Group flashcards by deck
+    const publicDecks = {};
+    rows.forEach((row) => {
+      if (!publicDecks[row.deckId]) {
+        publicDecks[row.deckId] = {
+          id: row.deckId,
+          name: row.deckName,
+          subject: row.deckSubject,
+          private: row.deckPrivate,
+          flashcards: [],
+        };
+      }
+      if (row.flashcardId) {
+        publicDecks[row.deckId].flashcards.push({
+          id: row.flashcardId,
+          question: row.flashcardQuestion,
+          answer: row.flashcardAnswer,
+        });
+      }
+    });
+    return Object.values(publicDecks);
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  saveCardDeckToDatabase,
+  deleteCardDeckFromDatabase,
+  getUsersDeckOfCardsFromDatabase,
+  getPublicDecksFromDatabase,
+};
