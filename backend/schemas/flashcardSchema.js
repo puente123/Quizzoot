@@ -1,9 +1,9 @@
 const db = require("../database/mysqlConnection");
 
-const addFlascardToDatabase = async (question, answer) => {
-  const query = "INSERT INTO flashcards (question, answer) VALUES (?, ?)";
+const addFlascardToDatabase = async (question, answer, tag) => {
+  const query = "INSERT INTO flashcards (question, answer, tag) VALUES (?, ?, ?)";
   try {
-    const [result] = await db.promise().query(query, [question, answer]);
+    const [result] = await db.promise().query(query, [question, answer, tag]);
     return result.insertId;
   } catch (error) {
     throw error;
