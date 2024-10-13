@@ -1,9 +1,10 @@
 const { db } = require("../database/mysqlConnection");
 
-const saveCardDeckToDatabase = async (name, userID) => {
-  const query = "INSERT INTO deckOfCards (name, userID) VALUES (?, ?)";
+const saveCardDeckToDatabase = async (name, private, userID) => {
+  const query =
+    "INSERT INTO deckOfCards (name, private, userID) VALUES (?,?, ?)";
   try {
-    const [result] = await db.promise().query(query, [name, userID]);
+    const [result] = await db.promise().query(query, [name, private, userID]);
     return result.insertId;
   } catch (error) {
     throw error;
