@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import NavBar from '../Layout/NavBar'
 import Quiz from '../Components/Quiz';
 import Loading from '../Components/Loading';
+import { Navigate } from 'react-router-dom';
 
-export default function PrivateTest() {
+export default function PrivateTest({username}) {
 	const [finished, setFinished] = useState(false);
 	const [score, setScore] = useState(0);
 
@@ -41,10 +42,10 @@ export default function PrivateTest() {
 	// TODO: replace <h1>Finished</h1> with handling for finishing the quiz
 	return (
 		<div>
-			<NavBar/>
+			<NavBar username={username} />
 			{!finished ?
 				<Quiz deck={dummyDeck} returnScore={returnScore} /> :
-				<h1>Finished</h1>}
+				<Navigate to="/view" />}
 		</div>
 	)
 }

@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-
-
-
-
-
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 function Login({setUsername}) {
 
@@ -28,11 +25,19 @@ function Login({setUsername}) {
 	const handleSubmit = (event) =>{
 		event.preventDefault()
 		const{email,password} = formData
-		console.log(email)
-		console.log(password)
+		signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				console.log(user);
+			})
+			.catch((error) => {
+				const errorCode = error.code;
+				const errorMessage = error.message;
+				console.log(errorCode, errorMessage);
+			});
 		// Backend Post and Get requests here
 		
-		setUsername(username) // pass the username to the rest of the program
+		setUsername(email) // pass the username to the rest of the program
 		navigate('/home')
 	}
 
