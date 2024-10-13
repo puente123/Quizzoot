@@ -13,7 +13,7 @@ export default function Answers({ locked, setLocked, submitAnswer, nextQuestion,
         if(selectedIndex < 0 || selectedIndex > 3)
             return;
         setLocked(true);
-        submitAnswer(selectedIndex);
+        submitAnswer(selectedIndex === correctAnswer);
     }
 
     function safeNextQuestion() {
