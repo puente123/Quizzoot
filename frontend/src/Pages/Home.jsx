@@ -25,7 +25,7 @@ export default function Home({username, userId}) {
 	const filteredDecks = deckList.flat().filter(deck => 
 		deck.name.toLowerCase().includes(searchText) ||
 		deck.subject.toLowerCase().includes(searchText)
-	);
+	)
 
 
 
