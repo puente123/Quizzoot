@@ -15,7 +15,7 @@ export default function NavBar({username}) {
               {username ? (
                   <>Signed in as: <a href="#login">{username}</a></>
                 ) : (
-                  <a href="#login">Click to sign in</a>
+                  <a href="/login">Click to sign in</a>
               )}
             </Navbar.Text>
           </Navbar.Collapse>
