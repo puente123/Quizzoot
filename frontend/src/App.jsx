@@ -8,6 +8,7 @@ import Login from './Pages/Login'
 import HostGame from './Pages/HostGame'
 import PrivateTest from './Pages/PrivateTest'
 import View from './Pages/View'
+import ProfileView from './Pages/ProfileView'
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
         <Route exact path = '/game' element= {<Game username = {username}/>}/>
         <Route exact path = '/host' element= {<HostGame username = {username}/>}/>
         <Route exact path = '/test' element= {<PrivateTest username = {username}/>}/>
-        
+        <Route exact path= '/profile' element= {<ProfileView username={username}/>}/>
       </Routes>
     </Router>
    </div>
