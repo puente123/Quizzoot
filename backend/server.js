@@ -3,6 +3,7 @@ const { connectDB } = require("./database/mysqlConnection");
 
 const app = express();
 const PORT = process.env.PORT || 2500;
+app.use(cors())
 
 (async () => {
   try {
