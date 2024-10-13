@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-function Signup() {
+function Signup({setUsername}) {
 
 	const [formData, setFormData] = useState({
 		username:'',
@@ -33,6 +33,8 @@ function Signup() {
 		console.log(email)
 		console.log(password)
 		// Backend Post and Get requests here
+		
+		setUsername(username) // pass the username to the rest of the program
 		navigate('/home')
 	}
 
