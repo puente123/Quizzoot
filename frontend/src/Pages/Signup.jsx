@@ -3,10 +3,6 @@ import { FloatingLabel,Form,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
 
-
-
-
-
 function Signup({setUsername}) {
 
 	const [formData, setFormData] = useState({

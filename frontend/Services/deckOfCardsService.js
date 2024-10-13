@@ -15,7 +15,7 @@ const apiClient = axios.create({
 
 const postCardDeck = async (body) => {
   try {
-    const response = apiClient.post("/", body);
+    const response = await apiClient.post("/", body);
     return response.data;
   } catch (error) {
     console.error("Error in posCardDeck call", error)
@@ -25,7 +25,7 @@ const postCardDeck = async (body) => {
 
 const getUserCardDecks = async (body) => {
   try {
-    const response = apiClient.get("/", body);
+    const response = await  apiClient.get("/", body);
     return response.data;
   } catch (error) {
     console.error("Error in getUserCardDeck call", error)
@@ -35,7 +35,7 @@ const getUserCardDecks = async (body) => {
 
 const getPublicCardDecks = async () => {
   try {
-    const response = apiClient.get("/public");
+    const response = await apiClient.get("/public");
     return response.data;
   } catch (error) {
     console.error("Error in getPublicCardDecks call", error)
@@ -45,7 +45,7 @@ const getPublicCardDecks = async () => {
 
 const deleteCardDeck = async (id) => {
   try {
-    const response = apiClient.delete(`/${id}`);
+    const response = await apiClient.delete(`/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error in deleteCardDeck call", error)

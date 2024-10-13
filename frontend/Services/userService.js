@@ -3,6 +3,7 @@
 userRouter.post("/", createUser);
 userRouter.delete("/:id", deleteUser) */
 
+import { paperClasses } from '@mui/material';
 import axios from 'axios'
 
 const baseURL = "http://localhost:3000/api/user";
@@ -13,7 +14,7 @@ const apiClient = axios.create({
 
 const postUser = async (body) => {
     try {
-        const response = apiClient.post("/", body)
+        const response = await apiClient.post("/", body)
         return response.data
     }
     catch(error){
@@ -23,7 +24,7 @@ const postUser = async (body) => {
 
 const deleteUser = async (id) => {
     try {
-        const response = apiClient.post(`/${id}`)
+        const response = await apiClient.delete(`/${id}`)
         return response.data
     }
     catch(error){
@@ -31,4 +32,13 @@ const deleteUser = async (id) => {
     }
 }
 
-export {postUser, deleteUser}
+const signInUser = async(body) => {
+    try{
+        const response = await apiClient.get('/signin', body)
+        return response.data
+    }catch(error){
+        console.error("Error in signInUser frontnend", error)
+    }
+}
+
+export {postUser, deleteUser, signInUser}
