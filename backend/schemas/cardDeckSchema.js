@@ -21,4 +21,53 @@ const deleteCardDeckFromDatabase = async (id) => {
   }
 };
 
-module.exports = { saveCardDeckToDatabase, deleteCardDeckFromDatabase };
+const getDeckOfCardsFromDatabase = async (userID) => {
+  const query = `
+    SELECT 
+      d.id AS deckId,
+      d.name AS deckName,
+      d.private AS deckPrivate,
+      f.id AS flashcardId,
+      f.question AS flashcardQuestion,
+      f.answer AS flashcardAnswer,
+      f.tag AS flashcardTag
+    FROM 
+      deckOfCards d
+    LEFT JOIN 
+      flashcards f
+    ON 
+      d.id = f.deckID
+    WHERE 
+      d.userID = ?
+  `;
+
+  try {
+    const [rows] = await db.promise().query(query, [userID]);
+
+    // Group flashcards by deck
+    const decks = {};
+    rows.forEach((row) => {
+      if (!decks[row.deckId]) {
+        decks[row.deckId] = {
+          id: row.deckId,
+          name: row.deckName,
+          private: row.deckPrivate,
+          flashcards: [],
+        };
+      }
+      if (row.flashcardId) {
+        decks[row.deckId].flashcards.push({
+          id: row.flashcardId,
+          question: row.flashcardQuestion,
+          answer: row.flashcardAnswer,
+          tag: row.flashcardTag,
+        });
+      }
+    });
+    return Object.values(decks);
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { saveCardDeckToDatabase, deleteCardDeckFromDatabase, getDeckOfCardsFromDatabase };
