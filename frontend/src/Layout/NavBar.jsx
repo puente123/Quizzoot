@@ -8,7 +8,7 @@ export default function NavBar({username}) {
     <>
       <Navbar fixed="top" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home" className='text-dark'>QUIZZOO</Navbar.Brand>
+          <Navbar.Brand href="#home" className='text-dark'>QUIZZOOT</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>

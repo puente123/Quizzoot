@@ -1,10 +1,11 @@
 const express = require("express");
 const { connectDB } = require("./database/mysqlConnection");
-const cors = require("cors");
+const cors = require("cors")
 
 const userRouter = require("./routes/userRoutes");
 const flashcardRouter = require("./routes/flashcardRoutes");
 const cardDeckRouter = require("./routes/cardDeckRoutes");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;

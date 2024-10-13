@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
 
-export default function FlashCard() {
+const FlashCard = ({front, back}) => {
 	const [isFront,setIsFront] = useState(true)
 	const [isUndo,setIsUndo] = useState(true)
-	const front = "Flash card front"
-	const back =  "Flash card back"
 	const handleClick = () =>{
 		setTimeout(() => {
 			setIsFront(!isFront)
 			setIsUndo(!isUndo)
-		}, 200);//500 milisecond delay
+		}, 200);//200 milisecond delay
 	}
 	const IconComponent = isUndo? UndoIcon : RedoIcon
 
@@ -22,12 +20,27 @@ export default function FlashCard() {
 				className=' align-items-center justify-content-center fw-bolder' 
 				style={{
 					width: '400px',
-					height: '200px'
+					height: '250px'
 				}}
 				onClick={handleClick}
 			>
 				<Card.Body className='d-flex align-items-center justify-content-center'>
-					{isFront?front:back}
+					{isFront ? (
+							front // Display front text
+						) : (
+							<ListGroup variant='flush' as="ul"> {/* Use an unordered list for bullet points */}
+								{back.map((answer, index) => (
+									<ListGroupItem
+										as='li'
+										key={index} 
+										className='text-center'
+										bsPrefix='list-group-item'
+									>
+										{answer}
+									</ListGroupItem> // Render each answer as a list item
+								))}
+							</ListGroup>
+					)}
 				</Card.Body>
 
 				< IconComponent
@@ -38,6 +51,7 @@ export default function FlashCard() {
 						cursor: 'pointer',
 						color: 'black'
 					}}
+					onClick={handleClick}
 				/>
 				
 			</Card>
@@ -47,3 +61,5 @@ export default function FlashCard() {
 	</div>
   )
 }
+
+export default FlashCard
