@@ -38,7 +38,7 @@ const getDeckOfCardsFromDatabase = async (userId) => {
     ON 
       d.id = f.deckId
     WHERE 
-      d.userID = ?
+      d.userId = ?
   `;
 
   try {

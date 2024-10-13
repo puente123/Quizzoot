@@ -26,10 +26,10 @@ const deleteCardDeck = async (req, res) => {
 };
 
 const getAllCardDecks = async (req, res) => {
-  const { userID } = req.body;
+  const { userId } = req.body;
 
   try {
-    const response = await getDeckOfCardsFromDatabase(userID);
+    const response = await getDeckOfCardsFromDatabase(userId);
     console.log(response);
     res.status(201).json(response);
   } catch (error) {
